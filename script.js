@@ -31,7 +31,7 @@ function removeKeyValuePair(button) {
 
 
 function fetchcurrent() {
-    fetch('https://timetabel.onrender.com/colleges/current') // Replace 'https://api.example.com/data' with your API endpoint
+    fetch('https://schoolscheduleserver.onrender.com/colleges/current') // Replace 'https://api.example.com/data' with your API endpoint
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -87,7 +87,7 @@ document.getElementById('scheduleForm').addEventListener('submit', function(even
     console.log(finalObject); // Log the final result
     const token = localStorage.getItem("authToken");
     console.log(token)
-    fetch('http://localhost:8000/colleges/updateTimeTable', {
+    fetch('https://schoolscheduleserver.onrender.com/colleges/updateTimeTable', {
         method: 'POST',
         mode: "cors",
         credentials :"include",
