@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Form</title>
+</head>
+<body>
+    <h2>Schedule Form</h2>
+    <div id="current">
+
+    </div>
+    
+    <button onclick="fetchcurrent()">Get Current</button>
+    <br/>
+    <label for="collegeName">College Name:</label>
+    <input type="text" id="collegeName" required>
+    <br><br>
+    <form id="scheduleForm">
+        <div id="days">
+            <!-- Days will be dynamically added here -->
+        </div>
+        <br>
+        <button type="button" onclick="addDay()">Add Day</button>
+        <br><br>
+        <button type="submit" >Submit</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

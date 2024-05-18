@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .form-input {
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #4C51BF;
+            outline: none;
+        }
+
+        .form-btn {
+            transition: background-color 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background-color: #4C51BF;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+        <h2 class="text-3xl font-semibold mb-6 text-center">Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-blue-500 form-input">
+            <input type="password" id="password" placeholder="Password" class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-blue-500 form-input">
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 form-btn">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            fetch("http://127.0.0.1:8000/admin/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Invalid credentials");
+                }
+                console.log("Not",response)
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful login
+                // console.log("Login successful");
+                // console.log("Received token:", data);
+                // Store the token in local storage or session storage
+                localStorage.setItem("user", email);
+                localStorage.setItem("authToken", data.token);
+                window.location.href = "index.html";
+            })
+            .catch(error => {
+                console.error("Login failed:", error.message);
+            });
+        });
+    </script>
+</body>
+</html>
