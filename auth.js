@@ -6,7 +6,7 @@ function isAuthenticated() {
 
 function redirectToLogin() {
     // Redirect to the login page
-    window.location.href = "login.html";
+    window.location.href = "Login.html";
 }
 
 // Check authentication status when the page loads
